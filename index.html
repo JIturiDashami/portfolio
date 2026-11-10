@@ -1,0 +1,463 @@
+<title>Dashami Jituri</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Dashami Jituri, B.Tech IT student in Mumbai. Builds AI and full-stack products and contributes to AOSSIE's PictoPy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: a sticky identity rail on the left, one reading column on the right. The open-source ledger is the single bold element. */
+  :root {
+    --bg: #F2F5F8;
+    --surface: #FFFFFF;
+    --ink: #0C1B2A;
+    --muted: #4E6073;
+    --line: #D3DDE6;
+    --brand: #0B3A6B;
+    --brand-soft: #E3EDF7;
+    --amber: #E3A21A;
+    --amber-ink: #3A2700;
+    --ok: #17673F;
+    --ok-bg: #DDF2E6;
+    --wait: #7A5200;
+    --wait-bg: #FBEBC8;
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Instrument Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0A141F;
+      --surface: #101E2D;
+      --ink: #E8EEF4;
+      --muted: #9DB0C2;
+      --line: #213447;
+      --brand: #8CBBF2;
+      --brand-soft: #14293F;
+      --amber: #F0B23A;
+      --amber-ink: #2A1B00;
+      --ok: #6FD39B;
+      --ok-bg: #123826;
+      --wait: #F0B23A;
+      --wait-bg: #3A2C0A;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0A141F;
+    --surface: #101E2D;
+    --ink: #E8EEF4;
+    --muted: #9DB0C2;
+    --line: #213447;
+    --brand: #8CBBF2;
+    --brand-soft: #14293F;
+    --amber: #F0B23A;
+    --amber-ink: #2A1B00;
+    --ok: #6FD39B;
+    --ok-bg: #123826;
+    --wait: #F0B23A;
+    --wait-bg: #3A2C0A;
+    color-scheme: dark;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.6;
+    padding-block: 32px 48px;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--brand); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+  h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; line-height: 1.15; }
+  p { margin: 0; }
+  ul { margin: 0; padding: 0; list-style: none; }
+
+  .skip {
+    position: absolute; left: 16px; top: -60px; background: var(--ink); color: var(--bg);
+    padding: 8px 14px; border-radius: 6px; z-index: 20; text-decoration: none;
+  }
+  .skip:focus { top: 12px; }
+
+  .shell {
+    max-width: 1120px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 280px minmax(0, 1fr);
+    gap: 64px;
+    align-items: start;
+  }
+
+  /* ---------- identity rail ---------- */
+  .rail { position: sticky; top: 32px; display: flex; flex-direction: column; gap: 24px; }
+  .name { font-size: 2.4rem; font-weight: 700; letter-spacing: -0.02em; }
+  .role { color: var(--muted); margin-top: 8px; }
+  .where { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); margin-top: 4px; }
+  .now {
+    display: inline-flex; align-items: center; gap: 8px; width: fit-content;
+    font-size: 0.82rem; font-weight: 500; padding: 6px 12px; border-radius: 999px;
+    background: var(--brand-soft); color: var(--brand);
+  }
+  .now i { width: 8px; height: 8px; border-radius: 50%; background: var(--amber); flex: none; }
+  .nav { display: flex; flex-direction: column; gap: 2px; }
+  .nav a {
+    font-family: var(--mono); font-size: 0.8rem; text-decoration: none; color: var(--muted);
+    padding: 6px 0 6px 14px; border-left: 2px solid var(--line);
+  }
+  .nav a:hover { color: var(--ink); border-left-color: var(--muted); }
+  .nav a[aria-current="true"] { color: var(--ink); border-left-color: var(--amber); font-weight: 500; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px 18px; font-size: 0.92rem; }
+  .mail { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; }
+  .mail-addr { font-family: var(--mono); font-size: 0.8rem; word-break: break-all; }
+  .btn {
+    font: inherit; font-size: 0.82rem; font-weight: 500; cursor: pointer;
+    background: transparent; color: var(--ink); border: 1px solid var(--line);
+    padding: 6px 12px; border-radius: 8px;
+  }
+  .btn:hover { border-color: var(--muted); }
+
+  /* ---------- content ---------- */
+  .main { display: flex; flex-direction: column; gap: 72px; min-width: 0; }
+  section { scroll-margin-top: 32px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 12px;
+  }
+  .eyebrow::after { content: ""; height: 1px; background: var(--line); flex: 1; }
+
+  .lead { font-size: clamp(1.9rem, 4vw, 2.9rem); font-weight: 700; letter-spacing: -0.025em; max-width: 20ch; }
+  .lead em { font-style: normal; color: var(--brand); }
+  .intro { max-width: 62ch; color: var(--muted); font-size: 1.06rem; margin-top: 20px; }
+  .facts { display: flex; flex-wrap: wrap; gap: 12px 40px; margin-top: 32px; }
+  .fact { display: flex; flex-direction: column; }
+  .fact b { font-family: var(--display); font-size: 1.9rem; letter-spacing: -0.02em; line-height: 1.1; }
+  .fact span { font-family: var(--mono); font-size: 0.74rem; color: var(--muted); }
+
+  /* open-source ledger */
+  .ledger { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); overflow: hidden; }
+  .ledger-head { padding: 18px 22px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 16px; align-items: baseline; }
+  .ledger-head h3 { font-size: 1.25rem; }
+  .ledger-head span { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+  .row { display: grid; grid-template-columns: 76px minmax(0, 1fr) auto; gap: 16px; padding: 16px 22px; align-items: start; border-top: 1px solid var(--line); }
+  .row:first-of-type { border-top: 0; }
+  .num {
+    font-family: var(--mono); font-size: 0.82rem; font-weight: 500; text-decoration: none;
+    background: var(--amber); color: var(--amber-ink); border-radius: 6px; padding: 3px 9px; width: fit-content;
+  }
+  .num:hover { text-decoration: underline; }
+  .row h4 { font-family: var(--display); font-size: 1.02rem; margin: 0 0 2px; font-weight: 700; }
+  .row p { color: var(--muted); font-size: 0.93rem; }
+  .pill { justify-self: start; width: fit-content; font-family: var(--mono); font-size: 0.72rem; font-weight: 500; padding: 3px 10px; border-radius: 999px; white-space: nowrap; }
+  .pill.merged { background: var(--ok-bg); color: var(--ok); }
+  .pill.review, .pill.open { background: var(--wait-bg); color: var(--wait); }
+  .ledger-sub { padding: 12px 22px; background: var(--brand-soft); font-family: var(--mono); font-size: 0.74rem; color: var(--brand); letter-spacing: 0.06em; text-transform: uppercase; border-top: 1px solid var(--line); }
+  .repo-note { color: var(--muted); max-width: 62ch; margin-bottom: 20px; }
+
+  /* projects */
+  .projects { display: flex; flex-direction: column; gap: 20px; }
+  .project { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 26px; display: flex; flex-direction: column; gap: 14px; }
+  .project-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 16px; align-items: baseline; }
+  .project h3 { font-size: 1.35rem; }
+  .project .tag { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); }
+  .project .what { color: var(--muted); max-width: 70ch; }
+  .project ul { display: flex; flex-direction: column; gap: 6px; padding-left: 18px; list-style: disc; font-size: 0.96rem; max-width: 74ch; }
+  .project li::marker { color: var(--amber); }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chips li { list-style: none; font-family: var(--mono); font-size: 0.72rem; background: var(--bg); border: 1px solid var(--line); padding: 3px 9px; border-radius: 6px; }
+  .project .chips { flex-direction: row; flex-wrap: wrap; gap: 6px; padding-left: 0; list-style: none; }
+  .project-links { display: flex; gap: 20px; font-weight: 500; font-size: 0.93rem; }
+
+  /* simple blocks */
+  .job { display: flex; flex-direction: column; gap: 10px; }
+  .job-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 16px; align-items: baseline; }
+  .job h3 { font-size: 1.25rem; }
+  .job .when { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); }
+  .job .sub { color: var(--muted); }
+  .job ul { display: flex; flex-direction: column; gap: 6px; padding-left: 18px; list-style: disc; max-width: 74ch; }
+  .job li::marker { color: var(--amber); }
+
+  .wins { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .win { border-top: 2px solid var(--amber); padding-top: 12px; }
+  .win b { display: block; font-family: var(--display); font-size: 1.05rem; }
+  .win span { color: var(--muted); font-size: 0.93rem; }
+
+  .skills { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 10px 20px; font-size: 0.96rem; }
+  .skills dt { font-family: var(--mono); font-size: 0.78rem; color: var(--muted); padding-top: 3px; }
+  .skills dd { margin: 0; }
+
+  .edu { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; }
+  .edu h3 { font-size: 1.15rem; }
+  .edu p { color: var(--muted); }
+  .edu .cgpa { font-family: var(--display); font-size: 1.9rem; font-weight: 700; line-height: 1; text-align: right; }
+  .edu .cgpa span { display: block; font-family: var(--mono); font-size: 0.72rem; font-weight: 400; color: var(--muted); margin-top: 4px; }
+
+  .contact p { max-width: 56ch; color: var(--muted); }
+  .contact .big { font-family: var(--display); font-size: clamp(1.4rem, 3.4vw, 2rem); color: var(--ink); margin: 14px 0 18px; word-break: break-word; }
+  .foot { border-top: 1px solid var(--line); padding-top: 20px; font-family: var(--mono); font-size: 0.74rem; color: var(--muted); }
+
+  @media (max-width: 920px) {
+    .shell { grid-template-columns: minmax(0, 1fr); gap: 40px; }
+    .rail { position: static; gap: 18px; }
+    .name { font-size: 2.1rem; }
+    .nav { flex-direction: row; flex-wrap: wrap; gap: 4px 16px; }
+    .nav a { border-left: 0; padding: 4px 0; border-bottom: 2px solid var(--line); }
+    .nav a[aria-current="true"] { border-bottom-color: var(--amber); }
+    .main { gap: 56px; }
+  }
+  @media (max-width: 600px) {
+    .row { grid-template-columns: minmax(0, 1fr); gap: 8px; padding: 16px 18px; }
+    .ledger-head, .ledger-sub { padding-inline: 18px; }
+    .wins { grid-template-columns: minmax(0, 1fr); }
+    .skills { grid-template-columns: minmax(0, 1fr); gap: 2px; }
+    .skills dd { margin-bottom: 12px; }
+    .project { padding: 20px; }
+    .edu .cgpa { text-align: left; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+</style>
+
+<a class="skip" href="#about">Skip to content</a>
+
+<div class="shell">
+  <aside class="rail" aria-label="Profile">
+    <div>
+      <h1 class="name">Dashami Jituri</h1>
+      <p class="role">Software engineering student. AI and full-stack products, open source.</p>
+      <p class="where">Mumbai, India</p>
+    </div>
+    <p class="now"><i aria-hidden="true"></i>Preparing for GSoC 2027 with AOSSIE</p>
+    <nav class="nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#open-source">Open source</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#recognition">Recognition</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="links">
+      <a href="https://github.com/JIturiDashami" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/dashami-jituri" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://codolio.com/profile/DashamiJituri" target="_blank" rel="noopener">Codolio</a>
+    </div>
+    <div class="mail">
+      <span class="mail-addr" id="mail-addr">jituridashami@gmail.com</span>
+      <button class="btn" id="copy-mail" type="button">Copy email</button>
+    </div>
+    <button class="btn" id="theme" type="button" aria-label="Switch between light and dark theme" style="width:fit-content">Theme</button>
+  </aside>
+
+  <main class="main" id="main">
+    <section id="about">
+      <p class="eyebrow">About</p>
+      <h2 class="lead">I build AI products and fix real bugs in <em>open source</em>.</h2>
+      <p class="intro">I study Information Technology at Usha Mittal Institute of Technology, SNDT Women's University, with a minor in Embedded Systems. I build full-stack and AI products with Python, FastAPI and Next.js, from the first idea to a deployed app. I also contribute to PictoPy, AOSSIE's privacy-first desktop photo manager, where I find bugs, reproduce them and send the fixes.</p>
+      <div class="facts">
+        <div class="fact"><b>9.18</b><span>CGPA / 10</span></div>
+        <div class="fact"><b>3</b><span>merged PRs in PictoPy</span></div>
+        <div class="fact"><b>3</b><span>projects live on the web</span></div>
+        <div class="fact"><b>2026</b><span>ISRO BAH prototype</span></div>
+      </div>
+    </section>
+
+    <section id="open-source">
+      <p class="eyebrow">Open source</p>
+      <p class="repo-note"><a href="https://github.com/AOSSIE-Org/PictoPy" target="_blank" rel="noopener">AOSSIE-Org/PictoPy</a> is a desktop photo manager built with Python, FastAPI, React, TypeScript and Tauri. Everything below is linked to its pull request or issue.</p>
+      <div class="ledger">
+        <div class="ledger-head"><h3>Pull requests</h3><span id="pr-summary"></span></div>
+        <div id="prs"></div>
+        <div class="ledger-sub">Issues I raised</div>
+        <div id="issues"></div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <p class="eyebrow">Projects</p>
+      <div class="projects">
+        <article class="project">
+          <div class="project-top"><h3>NabhaSense</h3><span class="tag">Jan 2026 to present</span></div>
+          <p class="what">Urban heat intelligence platform, built for the ISRO Bharatiya Antariksh Hackathon 2026.</p>
+          <ul>
+            <li>Next.js 14 frontend on Vercel, decoupled from a FastAPI machine-learning backend on Render, with a live Leaflet map of 7 Indian cities.</li>
+            <li>Random Forest model that estimates urban heat risk from weather and geographic data, trained on historical data from the Open-Meteo API.</li>
+            <li>Physics-based scenario simulator for tree cover, cool roofs and water bodies, and a multi-city dashboard with the SUHII metric (urban minus rural temperature).</li>
+          </ul>
+          <ul class="chips" aria-label="Stack"><li>Next.js 14</li><li>FastAPI</li><li>scikit-learn</li><li>Leaflet</li><li>Vercel</li><li>Render</li></ul>
+          <div class="project-links">
+            <a href="https://nabha-sense.vercel.app" target="_blank" rel="noopener">Live demo</a>
+            <a href="https://github.com/JIturiDashami/NabhaSense" target="_blank" rel="noopener">Source</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top"><h3>LegalEase AI</h3><span class="tag">Oct to Dec 2025</span></div>
+          <p class="what">Legal document assistant, built for the Google GenAI Exchange Hackathon.</p>
+          <ul>
+            <li>RAG-style pipeline: PyMuPDF extracts the text and Llama 3.3 70B (Groq API) answers multi-turn questions about the document. Tested on NDAs, rental, employment and service contracts.</li>
+            <li>Analysis in 7 languages, side-by-side contract comparison and Supabase authentication.</li>
+            <li>Frontend and backend deploy separately on Vercel and Render, so each can scale on its own.</li>
+          </ul>
+          <ul class="chips" aria-label="Stack"><li>Llama 3.3 70B</li><li>Groq</li><li>PyMuPDF</li><li>Supabase</li><li>Vercel</li><li>Render</li></ul>
+          <div class="project-links">
+            <a href="https://legalease-ai-two.vercel.app" target="_blank" rel="noopener">Live demo</a>
+            <a href="https://github.com/JIturiDashami/LEGALEASE-AI" target="_blank" rel="noopener">Source</a>
+          </div>
+        </article>
+
+        <article class="project">
+          <div class="project-top"><h3>FitPulse</h3><span class="tag">Nov 2025 to Jan 2026</span></div>
+          <p class="what">Health analytics platform from my Infosys Springboard internship.</p>
+          <ul>
+            <li>Z-score anomaly detection and 7-day forecasts for heart rate, steps and sleep, with confidence intervals and a composite multi-vital risk index.</li>
+            <li>Processes 30+ days of wearable telemetry. A serverless REST API feeds Claude AI for real-time health insights.</li>
+          </ul>
+          <ul class="chips" aria-label="Stack"><li>Python</li><li>Serverless REST API</li><li>Claude AI</li><li>Vercel</li></ul>
+          <div class="project-links">
+            <a href="https://fitpulse-health-ai.vercel.app" target="_blank" rel="noopener">Live demo</a>
+            <a href="https://github.com/JIturiDashami/FitPulse-Health-Anomaly-Detection" target="_blank" rel="noopener">Source</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="experience">
+      <p class="eyebrow">Experience</p>
+      <div class="job">
+        <div class="job-top"><h3>Infosys Springboard</h3><span class="when">Nov 2025 to Jan 2026</span></div>
+        <p class="sub">Software Engineering Intern, Python technology stack</p>
+        <ul>
+          <li>Owned the full software lifecycle of FitPulse across 4 sprint milestones, from requirements to a live deployment.</li>
+          <li>Built the anomaly detection engine and the 7-day forecasting model.</li>
+          <li>Shipped a serverless REST API and integrated Claude AI, using prompt engineering to keep the responses reliable.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="recognition">
+      <p class="eyebrow">Recognition</p>
+      <div class="wins">
+        <div class="win"><b>Flipkart GRiD 8.0</b><span>Semifinalist</span></div>
+        <div class="win"><b>Google Big Code Challenge</b><span>Top 15,000 of 100,000+ global registrations</span></div>
+        <div class="win"><b>Women Who Master Hackathon 2026</b><span>Top 35 of 800+ teams, Mumbai Regional Zonal Round</span></div>
+        <div class="win"><b>ISRO Bharatiya Antariksh Hackathon 2026</b><span>Built and submitted a deployed prototype (NabhaSense)</span></div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <p class="eyebrow">Skills</p>
+      <dl class="skills">
+        <dt>Languages</dt><dd>Python, C++, JavaScript, TypeScript, C, SQL</dd>
+        <dt>Backend</dt><dd>FastAPI, Node.js, REST APIs, serverless, PostgreSQL, MongoDB, Supabase, SQLite</dd>
+        <dt>Frontend</dt><dd>React, Next.js 14, Tailwind CSS, HTML and CSS</dd>
+        <dt>AI and ML</dt><dd>Pandas, NumPy, Random Forest, time-series forecasting, LLM integration, RAG</dd>
+        <dt>Tools</dt><dd>Git and GitHub, pytest, Vercel, Render</dd>
+        <dt>Core CS</dt><dd>Data structures and algorithms in C++, OOP, DBMS, operating systems, computer networks</dd>
+      </dl>
+    </section>
+
+    <section id="education">
+      <p class="eyebrow">Education</p>
+      <div class="edu">
+        <div>
+          <h3>B.Tech in Information Technology</h3>
+          <p>Minor in Embedded Systems</p>
+          <p>Usha Mittal Institute of Technology, SNDT Women's University, Mumbai</p>
+          <p style="font-family:var(--mono);font-size:0.78rem">2024 to 2028</p>
+        </div>
+        <div class="cgpa">9.18<span>CGPA / 10</span></div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <p class="eyebrow">Contact</p>
+      <p>I am looking for open-source and internship work in AI and backend engineering. The quickest way to reach me is email.</p>
+      <p class="big">jituridashami@gmail.com</p>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/dashami-jituri" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/JIturiDashami" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://codolio.com/profile/DashamiJituri" target="_blank" rel="noopener">Codolio</a>
+      </div>
+    </section>
+
+    <p class="foot">Dashami Govind Jituri, Mumbai, India</p>
+  </main>
+</div>
+
+<script>
+  // Open-source data. To change a status, edit "status" below: merged, review or open.
+  var PULLS = [
+    { n: 1616, title: "Face search results", text: "Face-search results now open in the shared results page, and a stuck search state after a failed search is fixed.", status: "merged" },
+    { n: 1532, title: "More image formats", text: "Added WebP, BMP, TIFF and GIF support to image validation, with tests for every format.", status: "merged" },
+    { n: 1507, title: "Open original file", text: "Replaced the deprecated Tauri plugin-shell with plugin-opener so the original photo opens in the default viewer.", status: "merged" },
+    { n: 1678, title: "Database error handling", text: "Removed debug output and added logged sqlite3 error handling with rollback, covered by tests.", status: "review" }
+  ];
+  var ISSUES = [
+    { n: 1673, title: "Choose which face to search", text: "Face search only uses the first face in a group photo. Proposed a face picker that lets the user choose one or several faces.", status: "open" },
+    { n: 1696, title: "Share page returns HTTP 500", text: "A non-ASCII character in the unlock cookie makes a password-protected share fail with a 500 instead of showing the password page.", status: "open" },
+    { n: 1697, title: "Photos skipped on Windows", text: "OpenCV cannot read GIFs or files with non-ASCII names on Windows, so those photos are skipped by AI tagging and face detection.", status: "open" }
+  ];
+  var LABEL = { merged: "Merged", review: "In review", open: "Open" };
+  var BASE = "https://github.com/AOSSIE-Org/PictoPy/";
+
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function rows(list, kind) {
+    return list.map(function (x) {
+      return '<div class="row">' +
+        '<a class="num" href="' + BASE + kind + "/" + x.n + '" target="_blank" rel="noopener" aria-label="' + (kind === "pull" ? "Pull request " : "Issue ") + x.n + '">#' + x.n + "</a>" +
+        "<div><h4>" + esc(x.title) + "</h4><p>" + esc(x.text) + "</p></div>" +
+        '<span class="pill ' + x.status + '">' + LABEL[x.status] + "</span></div>";
+    }).join("");
+  }
+  document.getElementById("prs").innerHTML = rows(PULLS, "pull");
+  document.getElementById("issues").innerHTML = rows(ISSUES, "issues");
+  var merged = PULLS.filter(function (p) { return p.status === "merged"; }).length;
+  document.getElementById("pr-summary").textContent = merged + " merged, " + (PULLS.length - merged) + " in review";
+
+  // Theme toggle
+  var root = document.documentElement;
+  try { var saved = localStorage.getItem("theme"); if (saved) root.setAttribute("data-theme", saved); } catch (e) {}
+  document.getElementById("theme").addEventListener("click", function () {
+    var current = root.getAttribute("data-theme");
+    if (!current) current = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    var next = current === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("theme", next); } catch (e) {}
+  });
+
+  // Copy email, with a selection fallback
+  var copyBtn = document.getElementById("copy-mail");
+  copyBtn.addEventListener("click", function () {
+    var addr = document.getElementById("mail-addr");
+    function done(ok) {
+      copyBtn.textContent = ok ? "Copied" : "Press Ctrl+C";
+      setTimeout(function () { copyBtn.textContent = "Copy email"; }, 1800);
+    }
+    function fallback() {
+      var r = document.createRange(); r.selectNodeContents(addr);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      done(false);
+    }
+    try {
+      navigator.clipboard.writeText("jituridashami@gmail.com").then(function () { done(true); }, fallback);
+    } catch (e) { fallback(); }
+  });
+
+  // Highlight the section being read in the side navigation
+  var links = Array.prototype.slice.call(document.querySelectorAll(".nav a"));
+  var sections = links.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+  function markActive() {
+    var line = window.innerHeight * 0.3, active = 0;
+    sections.forEach(function (s, i) { if (s.getBoundingClientRect().top <= line) active = i; });
+    links.forEach(function (a, i) { if (i === active) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+  }
+  window.addEventListener("scroll", markActive, { passive: true });
+  window.addEventListener("resize", markActive);
+  markActive();
+</script>
